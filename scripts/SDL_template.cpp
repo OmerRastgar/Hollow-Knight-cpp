@@ -198,8 +198,6 @@ void update(SDL_Renderer* gRenderer, SDL_Texture* assets){
 	SDL_Delay(5);	
 }
 
-
-
 int main( int argc, char* args[] )
 {
     SDL_RenderClear( gRenderer );
