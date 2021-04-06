@@ -4,7 +4,7 @@
 
 Player::Player(){
    mover= {50,50,60,60};
-   scr= {20,21,60,60};
+   scr= {45,1,60,70};
    health = 100;
    speed= 2;
    jump_bool=false;
@@ -21,12 +21,19 @@ void Player::move(std::string direction){
     }
 
     else if (direction == "East"){
+        scr.y= 0;
         mover.x+= speed1;
+        if (scr.x> 30)
+            scr.x= 0;
+        scr.x+= 5;
     
     }
     else if (direction == "West"){
+        scr.y= 10;
         mover.x-= speed1;
-    
+        if (scr.x> 30)
+            scr.x= 0;
+        scr.x+= 5;
     }
 
 }
