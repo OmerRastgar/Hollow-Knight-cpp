@@ -8,14 +8,20 @@ Toggle::Toggle(int y ,int z,int x, int a){
 }
 
 
-Toggle::check_click(){
+Toggle::Switch(x_loc1,x_loc2,y_loc1,y_loc2,state){
     if (y_loc1<=moverRect.y && moverRect.y<=y_loc2){
         if (x_loc1<=moverRect.x && moverRect.x<=x_loc2){
-            return 1;
+            if (state == "off"){
+                state  = "on";
+                srcRect.x++; // changing the position of the toggle (displaying different image for toggle)
+                // moverRect.x ++;
+
+            }
         }
-        
     }
-    return 0;
-
-
+    else{
+        state == "off";
+    }
 }
+
+

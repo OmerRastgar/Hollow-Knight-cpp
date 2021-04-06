@@ -1,10 +1,12 @@
 #include "Button.hpp"
 
-int Button::check_click(){
-    return 0;
-}
+
 
 void :: move(check){
+
+}
+
+void Button::Switch(x_loc1,x_loc2,y_loc1,y_loc2){
 
 }
 

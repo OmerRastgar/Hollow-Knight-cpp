@@ -6,9 +6,9 @@
 
 using namesapce std;
 
-int main(){
-    int CHECK = check_click();
-    move(CHECK);
-    return 0;
+// int main(){
+//     int State = check_click();
+//     move(CHECK);
+//     return 0;
 
-}
+// }
