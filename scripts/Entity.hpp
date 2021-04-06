@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
 #include <sdl.h>
-#include <string> 
+#include <string>
+ 
 class Player{
     SDL_Rect scr,mover;
     int health , speed,jump1,speed1;
@@ -28,7 +29,6 @@ class Wall{
 
 class object{
     int speed;
-    
     SDL_Rect scr,mover;
     public:
     bool gravity1 ;
