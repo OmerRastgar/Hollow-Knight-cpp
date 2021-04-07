@@ -1,10 +1,11 @@
 #include "Slider.hpp"
 #include "Toggle.hpp"
 
-bool Slider::Switch(x_loc1,x_loc2,y_loc1,y_loc2,state){
+bool Slider::Switch(int x_loc1,int x_loc2,int y_loc1,int y_loc2, bool click){
 
     if (y_loc1<=moverRect.y && moverRect.y<=y_loc2){
         if (x_loc1<=moverRect.x && moverRect.x<=x_loc2){
+            click =  true;
             if (state == "off"){
                 state  = "on";
                 moverRect.x ++;
@@ -17,6 +18,7 @@ bool Slider::Switch(x_loc1,x_loc2,y_loc1,y_loc2,state){
         }
 
     }
+    click = false;
     return false;
 }
 

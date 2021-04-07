@@ -10,8 +10,9 @@ class Button(){
     int x_loc2;
     int y_loc1 , y_loc2;
     string state = "off";
+    bool click = false;
     SDL_Rect srcRect, moverRect;
     public:
-    virtual bool Switch(x_loc1,x_loc2,y_loc1,y_loc2,state);
+    virtual bool Switch(int,int,int,int,bool);
 };
 

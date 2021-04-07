@@ -4,7 +4,7 @@
 
 class Slider : public Button{
     public:
-    void Switch(x_loc1,x_loc2,y_loc1,y_loc2,state);
+    bool Switch(int,int,int,int,bool);
 
 
 }
