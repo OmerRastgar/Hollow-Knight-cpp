@@ -3,6 +3,10 @@
 #include <sdl.h>
 #include <string>
 
+
+class Entity{
+
+};
 class Player{
     SDL_Rect scr,mover;
     int health , speed,jump1,speed1;
