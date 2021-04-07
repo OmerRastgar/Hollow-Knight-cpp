@@ -12,6 +12,6 @@ class Button(){
     string state = "off";
     SDL_Rect srcRect, moverRect;
     public:
-    virtual void Switch(x_loc1,x_loc2,y_loc1,y_loc2,state);
+    virtual bool Switch(x_loc1,x_loc2,y_loc1,y_loc2,state);
 };
 
