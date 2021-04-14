@@ -5,7 +5,9 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
-#include "Entity.hpp"
+#include "player.hpp"
+
+
 
 
 
@@ -43,16 +45,13 @@ SDL_Texture* assets=NULL;
 // music reference
 Mix_Music *bgMusic = NULL;
 
-Player p1;
-Wall w1(50,150);
-Wall w2(400,350);
-Wall w3(50,550);
-object cone(23,34);
+player p1;
 
-SDL_Rect mover= {0,0,100,100};
-SDL_Rect scr= {0,0,200,200};
+
 bool wa;
 SDL_Rect result;
+
+
 bool init()
 {
 	//Initialization flag
@@ -119,7 +118,7 @@ bool loadMedia()
 	//Loading success flag
 	bool success = true;
 
-	assets = loadTexture("assets1.png");
+	assets = loadTexture(".\\image\\sprite_kinght.png");
     if(assets==NULL)
     {
         printf("Unable to run due to error: %s\n",SDL_GetError());
@@ -147,9 +146,9 @@ void close()
 	SDL_DestroyWindow( gWindow );
 	gWindow = NULL;
 	gRenderer = NULL;
-	Mix_FreeMusic(bgMusic);
+	//Mix_FreeMusic(bgMusic);
 	
-	bgMusic = NULL;
+	//bgMusic = NULL;
 	//Quit SDL subsystems
 	IMG_Quit();
 	Mix_Quit();
@@ -185,26 +184,23 @@ SDL_Texture* loadTexture( std::string path )
 
 void update(SDL_Renderer* gRenderer, SDL_Texture* assets){
 
-
+	//std::cout << *(p1.return_rect(2)).x;
 	SDL_RenderClear( gRenderer ); 
 	//SDL_RenderCopy( gRenderer, assets, &bgSrc, &bg ); // rendering the main screen background
 	// status(gRenderer, assets);  // function to set all static objetcs
-	SDL_RenderCopy( gRenderer, assets, w1.return_rect(2), w1.return_rect(1) );
-	SDL_RenderCopy( gRenderer, assets, w2.return_rect(2), w2.return_rect(1) );
-	SDL_RenderCopy( gRenderer, assets, w3.return_rect(2), w3.return_rect(1) );
-	SDL_RenderCopy( gRenderer, assets, p1.return_rect(2), p1.return_rect(1) ); // all movement of objects 
-	SDL_RenderCopy( gRenderer, assets, cone.return_rect(2), cone.return_rect(1) );
+	//SDL_RenderCopy( gRenderer, assets, scrRect , moverRect  );
+	//SDL_RenderCopy( gRenderer, assets,   *(p1.return_rect(2)) , *(p1.return_rect(1))  );
+	SDL_RenderCopy( gRenderer, assets,   p1.return_rect(2) , p1.return_rect(1)  );
 	SDL_RenderPresent( gRenderer );	 // rendering the complete screen 
-	SDL_Delay(5);	
+	SDL_Delay(50);	
 }
 
-int main( int argc, char* args[] )
+int main(int argc, char* args[] )
 {
+	
     SDL_RenderClear( gRenderer );
 
-	//Start up SDL and create window
 	
-		//Main loop flag
 	bool quit = false;
 
 	//Event handler
@@ -214,41 +210,11 @@ int main( int argc, char* args[] )
 	loadMedia();
 	update(gRenderer, assets);
 	
-	//While application is running
+
+	
 	while( !quit  )
 	{
-		cone.gravity();
-		p1.gravity_check();
-		p1.jump();
-		w1.move();
-		w2.move();
-		w3.move();
-		update(gRenderer, assets);
-		if ( SDL_IntersectRect(cone.return_rect(1),p1.return_rect(1),&result)||SDL_IntersectRect(cone.return_rect(1),p1.return_rect(1),&result)||SDL_IntersectRect(cone.return_rect(1),p1.return_rect(1),&result)){
-			//std::cout << "result: "<< result.x<<"x: "<<p1.return_rect(1)->x<< std::endl;
-			if (result.x > p1.return_rect(1)->x)
-				cone.update_x(result.x+95);
-			if (result.x <= p1.return_rect(1)->x)
-				cone.update_x(result.x-95);
 		
-		}
-
-		if ( SDL_IntersectRect(p1.return_rect(1),w1.return_rect(1),&result)||SDL_IntersectRect(p1.return_rect(1),w2.return_rect(1),&result)||SDL_IntersectRect(p1.return_rect(1),w3.return_rect(1),&result)){
-			p1.gravity=false;
-			p1.update_y(result.y-50);
-		}
-		else{
-			p1.gravity=true;
-		}
-		if ( SDL_IntersectRect(cone.return_rect(1),w1.return_rect(1),&result)||SDL_IntersectRect(cone.return_rect(1),w2.return_rect(1),&result)||SDL_IntersectRect(cone.return_rect(1),w3.return_rect(1),&result)){
-			cone.gravity1=false;
-			cone.update_y(result.y-50);
-		}
-		else{
-			cone.gravity1=true;
-		}
-
-		//Handle events on queue
 		if( SDL_PollEvent( &e ) != 0 )
 		{
 			
@@ -259,46 +225,31 @@ int main( int argc, char* args[] )
 			}
 			
 			
-			if (e.key.keysym.sym == SDLK_r){  // reset the game
-				//reset();
+			if (e.key.keysym.sym == SDLK_r){  
 			}
 			
-			if(e.type == SDL_KEYDOWN){	
-				
+			if(e.type == SDL_KEYDOWN){		
 				if (e.key.keysym.sym == SDLK_SPACE){
 					p1.move("Jump");
 				}
-				else if (e.key.keysym.sym == SDLK_d){
+				else if (e.key.keysym.sym == SDLK_RIGHT){
 					p1.move("East");
 				}
-				else if (e.key.keysym.sym == SDLK_a){
+				else if (e.key.keysym.sym == SDLK_LEFT){
 					p1.move("West");
 				}
-				
-				
-				// moveWarrior(gRenderer, assets, e.key.keysym.sym);
-			// update();	
+				else if (e.key.keysym.sym == SDLK_x){
+					p1.move("attack");
+				}
 			}
 			
 		}
-		/*
-		if( Mix_PlayingMusic() == 0  )
-		{
-		
-			Mix_PlayMusic( bgMusic, -1 );
-			Mix_VolumeMusic(MIX_MAX_VOLUME/16);
-			
-		}
-		*/
+		p1.check();	
+		update(gRenderer, assets);
+
 	
 	}
-	
-
-
-
-	//Free resources and close SDL
 	close();
-
 	return 0;
 }
 

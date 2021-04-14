@@ -2,10 +2,15 @@
 #include <iostream>
 #include <sdl.h>
 #include <string>
- 
+
+
+class Entity{
+
+};
 class Player{
     SDL_Rect scr,mover;
     int health , speed,jump1,speed1;
+    
     public:
     bool gravity,jump_bool;
     Player();
@@ -14,11 +19,13 @@ class Player{
     void jump();
     SDL_Rect* return_rect(int val);
     void update_y(int val);
+    
 
 }; 
 
 class Wall{
-    SDL_Rect scr,mover;
+    SDL_Rect mover= {50,50,60,60};
+    SDL_Rect scr= {45,1,60,70};
     int temp;
     public:
     Wall(int x, int y);
