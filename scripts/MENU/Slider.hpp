@@ -7,4 +7,4 @@ class Slider : public Button{
     bool Switch(int,int,int,int,bool);
 
 
-}
+};

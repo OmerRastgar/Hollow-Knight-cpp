@@ -1,5 +1,6 @@
 #pragma once
-#inlcude <iostream>
+#include <iostream>
+#include <sdl.h>
 
 using namespace std;
 
@@ -8,5 +9,6 @@ class Static_obj{
     string name;
     int damage;
     public:
+    Static_obj(string n);
 
 };
