@@ -42,6 +42,8 @@ SDL_Texture* gTexture = NULL;
 //global reference to png image sheets
 SDL_Texture* assets=NULL;
 
+SDL_Texture* sprite_enemy=NULL;
+SDL_Texture* background=NULL;
 // music reference
 Mix_Music *bgMusic = NULL;
 
@@ -119,11 +121,14 @@ bool loadMedia()
 	bool success = true;
 
 	assets = loadTexture(".\\image\\sprite_kinght.png");
-    if(assets==NULL)
+	sprite_enemy= loadTexture(".\\image\\Enemy.png");
+    background = loadTexture(".\\image\\leftside.png");
+	if(assets==NULL or sprite_enemy==NULL or background == NULL)
     {
         printf("Unable to run due to error: %s\n",SDL_GetError());
         success =false;
     }
+	
 	/*
 	bgMusic = Mix_LoadMUS( "bgm.wav" );
 	
@@ -141,6 +146,10 @@ void close()
 	//Free loaded images
 	SDL_DestroyTexture(assets);
 	assets=NULL;
+	SDL_DestroyTexture(sprite_enemy);
+	sprite_enemy=NULL;
+	SDL_DestroyTexture(background);
+	background==NULL
 	//Destroy window
 	SDL_DestroyRenderer( gRenderer );
 	SDL_DestroyWindow( gWindow );
