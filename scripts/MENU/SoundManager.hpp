@@ -1,7 +1,8 @@
+#pragma once
 #include<iostream>
 #include<SDL.h>
 #include "string.h"
-#include"Sound.hpp"
+// #include"Sound.hpp"
 #include <map>
 using namespace std;
 

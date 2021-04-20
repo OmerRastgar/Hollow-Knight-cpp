@@ -1,3 +1,4 @@
+#pragma once
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
@@ -5,6 +6,9 @@
 #include <iostream>
 #include <string>
 
+// #include "menu.hpp"
+
+// menu m1("pause",{0,0,1920,1080},{0,0,800,600});
 
 
 //Screen dimension constants
@@ -41,6 +45,8 @@ SDL_Texture* assets=NULL;
 
 // music reference
 Mix_Music *bgMusic = NULL;
+SDL_Rect mover= {0,0,800,600};
+SDL_Rect scr=  {0,0,1920,1080};
 
 bool init()
 {
@@ -62,7 +68,7 @@ bool init()
 		}
 
 		//Create window
-		gWindow = SDL_CreateWindow( "SDL Template", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+		gWindow = SDL_CreateWindow( "Menu", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN ); //made change
 		if( gWindow == NULL )
 		{
 			printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -89,11 +95,13 @@ bool init()
 					printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
 					success = false;
 				}
+				/*
 				if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
 				{
 					printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
 					success = false;
 				}
+				*/
 			}
 		}
 	}
@@ -106,7 +114,7 @@ bool loadMedia()
 	//Loading success flag
 	bool success = true;
 
-	assets = loadTexture("assests2.png");
+	assets = loadTexture("pausemenu.png");
     if(assets==NULL)
     {
         printf("Unable to run due to error: %s\n",SDL_GetError());
@@ -169,18 +177,18 @@ SDL_Texture* loadTexture( std::string path )
 
 	return newTexture;
 }
-/*
+
 void update(SDL_Renderer* gRenderer, SDL_Texture* assets){
 
 
 	SDL_RenderClear( gRenderer ); // clearing screen for next screen output
-	SDL_RenderCopy( gRenderer, assets, &bgSrc, &bg ); // rendering the main screen background
+	SDL_RenderCopy( gRenderer, assets, &scr, &mover ); // rendering the main screen background
 	// status(gRenderer, assets);  // function to set all static objetcs
-	SDL_RenderCopy( gRenderer, assets, &warriorSrc, &warriorMover ); // all movement of objects 
+	// SDL_RenderCopy( gRenderer, assets, &warriorSrc, &warriorMover ); // all movement of objects 
 	SDL_RenderPresent( gRenderer );	 // rendering the complete screen 
 	SDL_Delay(5);	
 }
-*/
+
 
 
 int main( int argc, char* args[] )
@@ -195,37 +203,38 @@ int main( int argc, char* args[] )
 	//Event handler
 	SDL_Event e;
 	int initialized , loaded;
-	init();
-		//loaded= !loadMedia();
+	init();	
+	loadMedia();
 	loaded=1;
-	//update(gRenderer, assets);
+	update(gRenderer, assets);
 	
 	//While application is running
 	while( !quit  )
 	{
 		//Handle events on queue
-		while( SDL_PollEvent( &e ) != 0 )
+		while( SDL_PollEvent( &e ) != 0 ) // getting x and y ordinates 
 		{
 			//User requests quit
 			if( e.type == SDL_QUIT )
 			{
 				quit = true;
 			}
-			if (e.key.keysym.sym == SDLK_r){  // reset the game
-				//reset();
-			}
-			if(e.type == SDL_KEYDOWN){	
-				// moveWarrior(gRenderer, assets, e.key.keysym.sym);
-			// update();	
+
+			if(e.type == SDL_MOUSEBUTTONDOWN){
+			//this is a good location to add pigeon in linked list.
+				int xMouse, yMouse;
+				//SDL_GetMouseState(&xMouse,&yMouse);
+				//humania.createObject(xMouse, yMouse);
 			}
 		}
+		/*
 		if( Mix_PlayingMusic() == 0  )
 		{
 		
 			Mix_PlayMusic( bgMusic, -1 );
 			Mix_VolumeMusic(MIX_MAX_VOLUME/16);
 			
-		}
+		}*/
 	
 	}
 	

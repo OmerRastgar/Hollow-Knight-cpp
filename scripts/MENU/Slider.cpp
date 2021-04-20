@@ -1,11 +1,13 @@
 #include "Slider.hpp"
 
-Slider::Slider(int x1 ,int x2,int y1, int y2){
-    x_loc1 = x1;
-    x_loc2 = x2;
-    y_loc1 = y1;
-    y_loc2 = y2;
-}
+// Slider::Slider(int x1 ,int x2,int y1, int y2,int a, int b){
+//     x_loc1 = x1;
+//     x_loc2 = x2;
+//     y_loc1 = y1;
+//     y_loc2 = y2;
+//     X = a;
+//     Y = b;
+// }
 // ------------------commenting out the previous implentation of teh Switch function: (no longer in use)--------------------
 // bool Slider::Switch(int x_loc1,int x_loc2,int y_loc1,int y_loc2, bool click){ 
 
@@ -45,10 +47,10 @@ Slider::Slider(int x1 ,int x2,int y1, int y2){
     */
 
 
-bool Slider::Slide(int Cursor.X, int Cursor.Y ,bool click){
-    if (x_loc1< Cursor.X < x_loc2 and y_loc1< Cursor.Y < y_loc2 ){
-        moverRect.x =  Cursor.X; 
-        level=  (mover.x-x_loc1)/(x_loc2-x_loc1)  //this tells us where the slider is ie at the 100% mark or 50 % mark
+bool Slider::Slide(int X, int Y ,bool click){
+    if (x_loc1< X < x_loc2 and y_loc1< Y < y_loc2 ){
+        moverRect.x =  X; 
+        level=  (moverRect.x-x_loc1)/(x_loc2-x_loc1);  //this tells us where the slider is ie at the 100% mark or 50 % mark
         srcRect.x+=level; // moving the Slider to the required position
     }
 }
