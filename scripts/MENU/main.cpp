@@ -7,12 +7,5 @@
 using namesapce std;
  // not sure how u are testing these functions ? 
 
+// not testing right now. just made this initially.  maybe this is useless.
 
-
-
-// int main(){
-//     int State = check_click();  
-//     move(CHECK);
-//     return 0;
-
-// }

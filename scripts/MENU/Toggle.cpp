@@ -1,10 +1,11 @@
 #include "Toggle.hpp"
 
-Toggle::Toggle(int y ,int z,int x, int a){
-    y_loc1 = y;
-    y_loc2 = z;
-    x_loc1 = x;
-    x_loc2 = a;
+
+Toggle::Toggle(int x1 ,int x2,int y1, int y2){
+    x_loc1 = x1;
+    x_loc2 = x2;
+    y_loc1 = y1;
+    y_loc2 = y2;
 }
 
 

@@ -1,16 +1,18 @@
 #include<iostream>
 #include<SDL.h>
 #include "string.h"
-#include <list>
 #include"Sound.hpp"
+#include <map>
 using namespace std;
 
 
 class SoundManager{
+    protected:
+    string name;
+    map <string, Sound*> LST;  //map which has a key <name, sound >
 public:
-list <Sound> lst;
-
-
+void get_Sound(Sound*,string); // function that gets a sound and it save the sound in the map
+virtual void play(string); //function gets a string name u return a sound 
 
 };
 
