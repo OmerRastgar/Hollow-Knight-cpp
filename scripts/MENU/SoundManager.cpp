@@ -1,12 +1,12 @@
 #include "SoundManager.hpp"
 
 
-void SoundManager::get_Sound(Sound *S, string name){
-    Sound* S = new Sound(new Mix_Music(), new Mix_Chunk());
-    LST.insert(MyPair(name, S));
+void SoundManager::get_Sound(Mix_Music sound1, std::string name){
+    
+    LST[name] = new Sound( name, sound1);
 }
 
-void SoundManager::play(string name){
+void SoundManager::play(std::string name){
     Sound* ptr = LST[name];
     cout<<*ptr;
 }
