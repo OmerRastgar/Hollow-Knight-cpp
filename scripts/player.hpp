@@ -13,5 +13,5 @@ class player:public Entity{
  public:
  player();
  void move(std::string direction);
- void check();
+ void check();   // check if attack animation is enabled
 };

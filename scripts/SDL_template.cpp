@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 #include "player.hpp"
+#include "Enemy.hpp"
+
 
 
 
@@ -44,14 +46,15 @@ SDL_Texture* assets=NULL;
 
 SDL_Texture* sprite_enemy=NULL;
 SDL_Texture* background=NULL;
+
 // music reference
 Mix_Music *bgMusic = NULL;
 
 player p1;
-
+Enemy E1;
 
 bool wa;
-SDL_Rect result;
+SDL_Rect moverbg= {0,500,800,600};
 
 
 bool init()
@@ -121,8 +124,8 @@ bool loadMedia()
 	bool success = true;
 
 	assets = loadTexture(".\\image\\sprite_kinght.png");
-	sprite_enemy= loadTexture(".\\image\\Enemy.png");
-    background = loadTexture(".\\image\\leftside.png");
+	sprite_enemy= loadTexture(".\\image\\enemy2.png");
+    background = loadTexture(".\\image\\background1.png");
 	if(assets==NULL or sprite_enemy==NULL or background == NULL)
     {
         printf("Unable to run due to error: %s\n",SDL_GetError());
@@ -149,7 +152,7 @@ void close()
 	SDL_DestroyTexture(sprite_enemy);
 	sprite_enemy=NULL;
 	SDL_DestroyTexture(background);
-	background==NULL
+	background==NULL;
 	//Destroy window
 	SDL_DestroyRenderer( gRenderer );
 	SDL_DestroyWindow( gWindow );
@@ -199,7 +202,9 @@ void update(SDL_Renderer* gRenderer, SDL_Texture* assets){
 	// status(gRenderer, assets);  // function to set all static objetcs
 	//SDL_RenderCopy( gRenderer, assets, scrRect , moverRect  );
 	//SDL_RenderCopy( gRenderer, assets,   *(p1.return_rect(2)) , *(p1.return_rect(1))  );
+	SDL_RenderCopy( gRenderer, background,  &moverbg , NULL  );
 	SDL_RenderCopy( gRenderer, assets,   p1.return_rect(2) , p1.return_rect(1)  );
+	SDL_RenderCopy( gRenderer, sprite_enemy,   E1.return_rect(2) , E1.return_rect(1)  );
 	SDL_RenderPresent( gRenderer );	 // rendering the complete screen 
 	SDL_Delay(50);	
 }
@@ -223,7 +228,7 @@ int main(int argc, char* args[] )
 	
 	while( !quit  )
 	{
-		
+		E1.patrol();
 		if( SDL_PollEvent( &e ) != 0 )
 		{
 			
@@ -249,6 +254,12 @@ int main(int argc, char* args[] )
 				}
 				else if (e.key.keysym.sym == SDLK_x){
 					p1.move("attack");
+				}
+				else if (e.key.keysym.sym == SDLK_r){
+					moverbg.x+=50;				
+									}
+				else if (e.key.keysym.sym == SDLK_t){
+					moverbg.x-=50;
 				}
 			}
 			
