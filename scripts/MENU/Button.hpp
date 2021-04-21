@@ -9,9 +9,9 @@ using namespace std;
 
 class Button{
     protected:
-    int x_loc1, x_loc2, y_loc1, y_loc2; 
+    // int x_loc1, x_loc2, y_loc1, y_loc2; 
     int X ,Y; //cursor's cordinates
-    string state = "off";
+    string state = "off"; string name;
     SDL_Rect srcRect, moverRect;
     public:
     void getCordinates(int a, int b);

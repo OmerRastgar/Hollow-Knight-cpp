@@ -11,9 +11,9 @@
 // }
 
 
-bool Toggle::Switch(int x_loc1,int x_loc2,int y_loc1,int y_loc2){
-    if (y_loc1<=moverRect.y && moverRect.y<=y_loc2){
-        if (x_loc1<=moverRect.x && moverRect.x<=x_loc2){
+bool Toggle::Switch(int x,int y){
+    if (y>=moverRect.y && moverRect.h>=y){
+        if (x>=moverRect.x && moverRect.w>=x){
             
             if (state == "off"){
                 state  = "on";
