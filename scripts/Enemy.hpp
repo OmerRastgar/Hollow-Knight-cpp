@@ -5,7 +5,9 @@
 
 using namespace std;
 
-class Enemy{
+class Enemy: public Entity{
+    int count=0;
+    int speed; 
     public:
     Enemy();
     void patrol();

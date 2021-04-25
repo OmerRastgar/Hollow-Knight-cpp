@@ -104,10 +104,3 @@ void player::check(){
     }
 }
 
-SDL_Rect* player::return_rect(int val){
-    if (val == 1)
-        return &mover;
-    else if(val == 2)
-        return &scr;
-    
-}
