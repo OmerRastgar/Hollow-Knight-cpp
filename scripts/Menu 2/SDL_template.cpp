@@ -231,6 +231,9 @@ int main( int argc, char* args[] )
 			{
 				quit = true;
 			}
+			if (e.key.keysym.sym == SDLK_ESCAPE){
+				status= "pause";		
+			}
 
 			if(e.type == SDL_MOUSEBUTTONDOWN){
 			//this is a good location to add pigeon in linked list.
@@ -239,14 +242,14 @@ int main( int argc, char* args[] )
 				SDL_GetMouseState(&xMouse,&yMouse);
 				cout << xMouse<< " "<< yMouse;
 				id= pause.check_buttons(xMouse,yMouse);
-				if (id == "continue"){
+				if (id == "continue" and status == "pause" ){
 					status= "continue";
 				}
-				if (id == "option"){
+				if (id == "option" and status == "pause"){
 					status = "option";
 				}
-				if (id == "exit"){
-					status = "exit";
+				if (id == "exit" and status == "pause"){
+					quit = true;
 					
 				}
 				//humania.createObject(xMouse, yMouse);
